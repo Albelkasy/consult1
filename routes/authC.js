@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
 
 
 //UPDATE
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.put("/:id", async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
