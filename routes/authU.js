@@ -16,9 +16,9 @@ router.post("/register", async (req, res) => {
 
   try {
     const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    res.status(201).json({savedUser,status:true});
   } catch (err) {
-    res.status(500).json(err);
+    res.status(200).json({err,status:false});
   }
 });
 
@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
             }
         );
 
-        !user && res.status(401).json("Wrong User email");
+        !user && res.status(200).json({message:"Wrong User email",status:false});
 
         const hashedPassword = CryptoJS.AES.decrypt(
             user.password,
@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
         const inputPassword = req.body.password;
         
         originalPassword != inputPassword && 
-            res.status(401).json("Wrong Password");
+            res.status(200).json({message:"Wrong Password",status:false});
 
         const accessToken = jwt.sign(
         {
@@ -57,11 +57,11 @@ router.post('/login', async (req, res) => {
         );
   
         const { password, ...others } = user._doc;  
-        res.status(200).json({...others, accessToken});
+        res.status(200).json({...others, accessToken,status:true});
 
     }catch(err){
         console.log(err);
-        res.status(500).json(err);
+        res.status(200).json({err,status:false});
     }
 
 });
