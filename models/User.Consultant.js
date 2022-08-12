@@ -20,6 +20,10 @@ const ConsultantSchema = new mongoose.Schema(
       required: true,
       min: 6,
     },
+    price:{
+      type:String,
+      max:100
+    },
     Qualification: {
       type: String,
       max: 300
