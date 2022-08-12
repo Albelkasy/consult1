@@ -32,7 +32,10 @@ const ConsultantSchema = new mongoose.Schema(
       type: String,
       max: 30
     },
-
+    rating:{
+      type:Number,
+      max:6
+    },
     profilePicture: {
       type: String,
       default: "",

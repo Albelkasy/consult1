@@ -1,4 +1,5 @@
 const User = require("../models/User.user");
+const consultant = require("../models/User.Consultant");
 const CryptoJS = require("crypto-js");
 const {
   verifyToken,
@@ -52,6 +53,16 @@ router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+router.get("/find1/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const consultants = await consultant.findById(req.params.id);
+    const { password, ...others } = consultants._doc;
+    res.status(200).json({others,status:true});
+  } catch (err) {
+    res.status(200).json({err,status:false});
+  }
+});
+
 //GET ALL USER
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   const query = req.query.new;
@@ -60,6 +71,18 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
       ? await User.find().sort({ _id: -1 }).limit(5)
       : await User.find();
     res.status(200).json({users,status:true});
+  } catch (err) {
+    res.status(200).json({err,status:false});
+  }
+});
+
+router.get("/consultant", verifyTokenAndAdmin, async (req, res) => {
+  const query = req.query.new;
+  try {
+    const consultants = query
+      ? await consultant.find().sort({ _id: -1 }).limit(5)
+      : await consultant.find();
+    res.status(200).json({consultants,status:true});
   } catch (err) {
     res.status(200).json({err,status:false});
   }
