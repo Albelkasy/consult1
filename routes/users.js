@@ -43,7 +43,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //GET USER
-router.get("/find/:id", verifyToken, async (req, res) => {
+router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     const { password, ...others } = user._doc;
@@ -53,7 +53,7 @@ router.get("/find/:id", verifyToken, async (req, res) => {
   }
 });
 
-router.get("/find1/:id", verifyToken, async (req, res) => {
+router.get("/find1/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     const consultants = await consultant.findById(req.params.id);
     const { password, ...others } = consultants._doc;
@@ -64,7 +64,7 @@ router.get("/find1/:id", verifyToken, async (req, res) => {
 });
 
 //GET ALL USER
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
+router.get("/", verifyTokenAndAuthorization, async (req, res) => {
   const query = req.query.new;
   try {
     const users = query
@@ -76,7 +76,7 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-router.get("/consultant", verifyTokenAndAdmin, async (req, res) => {
+router.get("/consultant", verifyTokenAndAuthorization, async (req, res) => {
   const query = req.query.new;
   try {
     const consultants = query
