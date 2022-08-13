@@ -24,6 +24,10 @@ const ConsultantSchema = new mongoose.Schema(
       type:String,
       max:100
     },
+    service:{
+      type:Number,
+      min:0
+    },
     Qualification: {
       type: String,
       max: 300
@@ -34,8 +38,14 @@ const ConsultantSchema = new mongoose.Schema(
     },
     rating:{
       type:Number,
+      min:0,
       max:6
     },
+    clinet:{
+      type:Number,
+      min:0
+    },
+
     profilePicture: {
       type: String,
       default: "",
