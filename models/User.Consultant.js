@@ -59,6 +59,10 @@ const ConsultantSchema = new mongoose.Schema(
     phone: {
       type: Number,
       max: 50
+    },
+    isAdmin:{
+      type:Boolean,
+      default:false
     }
   },
   { timestamps: true }
