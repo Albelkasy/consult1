@@ -19,7 +19,8 @@ const stripeRoute = require("./routes/stripe");
 const router = express.Router();
 const path = require("path");
 const paypal = require('paypal-rest-sdk');
-const cors = require("cors")
+const cors = require("cors");
+const UserConsultant = require("./models/User.Consultant");
 
 dotenv.config();
 
@@ -40,29 +41,27 @@ const storage = multer.diskStorage({
     cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-    cb(null, req.body.name);
+    cb(null,Date.now()+"-"+Math.random()*100+file.originalname);
   },
 });
 
-const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
+const upload = multer({ dest:"public/images", storage });
+app.post("/api/upload/:id", upload.single("file"), async (req, res) => {
   try {
-    return res.status(200).json({message:"File uploded successfully",status:true});
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.file.path
+      },
+      { new: true }
+    );
+    return res.status(200).json({message:"File uploded successfully",updatedUser,status:true});
   } catch (error) {
     console.error(error);
   }
 });
-app.use(
-  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
-);
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use("/api/authU", authURoute);
 app.use("/api/authC", authCRoute);
