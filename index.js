@@ -46,16 +46,15 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ dest:"public/images", storage });
-app.post("/api/upload/:id", upload.single("file"), upload.single("photo"), async (req, res) => {
+app.post("/api/upload/:id", upload.single("file"),async (req, res) => {
   try {
     console.log(req.file.path)
-    const updatedUser = await Consultant.findByIdAndUpdate(
+    const updatedUser = await Consultant.findOneAndUpdate(
       req.params.id,
       {
         $set:
         {
           file:req.file.path,
-          photo:req.file.path
         },
       },
       { new: true }
@@ -66,8 +65,26 @@ app.post("/api/upload/:id", upload.single("file"), upload.single("photo"), async
   }
 });
 
-app.use(cors());
+app.post("/api/upload1/:id",upload.single("photo"), async (req, res) => {
+  try {
+    console.log(req.file.path)
+    const updatedUser1 = await Consultant.findOneAndUpdate(
+      req.params.id,
+      {
+        $set:
+        {
+          photo:req.file.path,
+        },
+      },
+      { new: true }
+    );
+    return res.status(200).json({message:"File uploded successfully",updatedUser1,status:true});
+  } catch (error) {
+    console.error(error);
+  }
+});
 
+app.use(cors());
 app.use("/api/authU", authURoute);
 app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
