@@ -49,7 +49,7 @@ const upload = multer({ dest:"public/images", storage });
 app.post("/api/upload/:id", upload.single("file"),async (req, res) => {
   try {
     console.log(req.file.path)
-    const updatedUser = await Consultant.findOneAndUpdate(
+    const updatedUser = await Consultant.findByIdAndUpdate(
       req.params.id,
       {
         $set:
@@ -68,7 +68,7 @@ app.post("/api/upload/:id", upload.single("file"),async (req, res) => {
 app.post("/api/upload1/:id",upload.single("photo"), async (req, res) => {
   try {
     console.log(req.file.path)
-    const updatedUser1 = await Consultant.findOneAndUpdate(
+    const updatedUser1 = await Consultant.findByIdAndUpdate(
       req.params.id,
       {
         $set:
