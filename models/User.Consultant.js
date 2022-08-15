@@ -54,7 +54,7 @@ const ConsultantSchema = new mongoose.Schema(
       type: String,
       max: 30
     },
-    CVPhoto: {
+    file:{
       type: String,
       default: "",
     },

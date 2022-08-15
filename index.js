@@ -20,7 +20,7 @@ const router = express.Router();
 const path = require("path");
 const paypal = require('paypal-rest-sdk');
 const cors = require("cors");
-const UserConsultant = require("./models/User.Consultant");
+const Consultant = require("./models/User.Consultant");
 
 dotenv.config();
 
@@ -48,10 +48,11 @@ const storage = multer.diskStorage({
 const upload = multer({ dest:"public/images", storage });
 app.post("/api/upload/:id", upload.single("file"), async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(
+    console.log(req.file.path)
+    const updatedUser = await Consultant.findOneAndUpdate(
       req.params.id,
       {
-        $set: req.file.path
+        $set: {file:req.file.path},
       },
       { new: true }
     );
