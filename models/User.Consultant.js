@@ -46,7 +46,7 @@ const ConsultantSchema = new mongoose.Schema(
       min:0
     },
 
-    profilePicture: {
+    photo: {
       type: String,
       default: "",
     },

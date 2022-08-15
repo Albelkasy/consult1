@@ -46,13 +46,17 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ dest:"public/images", storage });
-app.post("/api/upload/:id", upload.single("file"), async (req, res) => {
+app.post("/api/upload/:id", upload.single("file"), upload.single("photo"), async (req, res) => {
   try {
     console.log(req.file.path)
     const updatedUser = await Consultant.findOneAndUpdate(
       req.params.id,
       {
-        $set: {file:req.file.path},
+        $set:
+        {
+          file:req.file.path,
+          photo:req.file.path
+        },
       },
       { new: true }
     );
