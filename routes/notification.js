@@ -5,7 +5,7 @@ router.post('/fcm',async (req, res, next) => {
     try {
         let fcm = new FCM(process.env.SERVER_KEY)
         let message = {
-            to:req.body.token,
+            to:'/topics/'+req.body.topic,
             notification:{
                 title:req.body.title,
                 body:req.body.body,
