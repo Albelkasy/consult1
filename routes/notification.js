@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const { response } = require('express');
 const FCM = require('fcm-node');
 router.post('/fcm',async (req, res, next) => {
     try {
