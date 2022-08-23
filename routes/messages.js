@@ -27,4 +27,16 @@ router.get("/:conversationId", async (req, res) => {
   }
 });
 
+router.get("/find/:conversationId/:sender", async (req, res) => {
+  try {
+    const conversation = await Message.find({
+      conversationId:req.params.conversationId,
+      sender:req.params.sender
+    });
+    res.status(200).json(conversation)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
