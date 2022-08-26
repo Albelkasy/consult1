@@ -11,7 +11,6 @@ const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const authURoute = require("./routes/authU");
 const authCRoute = require("./routes/authC");
-const fcm = require('./routes/notification')
 const payRoute = require('./routes/pay')
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
@@ -21,6 +20,7 @@ const path = require("path");
 const paypal = require('paypal-rest-sdk');
 const cors = require("cors");
 const Consultant = require("./models/User.Consultant");
+
 
 dotenv.config();
 
@@ -90,7 +90,6 @@ app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
 app.use("/api/pay", payRoute);
 app.use("/auth", authRoute);
-app.use(fcm);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/checkout", stripeRoute);

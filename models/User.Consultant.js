@@ -45,7 +45,9 @@ const ConsultantSchema = new mongoose.Schema(
       type:Number,
       min:0
     },
-
+    FCM_TOKEN:{
+      type:String
+    },
     photo: {
       type: String,
       default: "",
