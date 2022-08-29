@@ -11,7 +11,6 @@ router.get('/changepass/:id', async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log(req.params.id)
   // if (req.body.password) {
   //   req.body.password = CryptoJS.AES.encrypt(
   //     req.body.password,
