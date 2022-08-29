@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopolo
     console.log("Connected to MongoDB");
   }
 );
-app.use("public/images", express.static(path.join(__dirname, "public/images")));
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use( express.static(path.join(__dirname, "public")));
 
 //middleware
