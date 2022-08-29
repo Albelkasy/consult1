@@ -30,7 +30,7 @@ router.post("/:id",validation, async (req, res) => {
       );
     res.status(200).json("تم تغيير كلمة السر");
     }else{
-    res.status(200).json(`Password must be at least 8 characters, include an uppercase letter , number and symbol like [@,#.*]${<h1>Back</h1>}`);
+    res.status(200).json("Password must be at least 8 characters, include an uppercase letter , number and symbol like [@,#.*] العودة الى الخلف");
     }
   } catch (err) {
     res.status(200).json({ err, status: false });
