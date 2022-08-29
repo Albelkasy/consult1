@@ -6,7 +6,7 @@ router.get('/changepass/:id', async (req, res) => {
   res.render('changepass.ejs')
 });
 
-router.post("/:id", async (req, res) => {
+router.post("/", async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
