@@ -22,6 +22,11 @@
                     <hr>
                     <form action="/<%= findC._id %> " method="post">
                         <input name="password" placeholder="New Password" type="password" class="form-control my-2">
+                        <% if (errors.find(e=>e.param=='password')) { %>
+                            <div class="alert alert-danger">
+                                invaled input
+                            </div>
+                        <% } %>
                         <input name="repass" placeholder="Repeat Password" type="password" class="form-control my-2">
                         <button class="btn btn-info mt-3">Save Setting</button>
                     </form>
