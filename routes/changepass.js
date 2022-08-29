@@ -7,7 +7,7 @@ const validation = require('../validator/settings.validation')
 router.get('/changepass/:id', async (req, res) => {
   const {id} = req.params
   const findC = await consultant.findOne({_id:id})
-  res.render('changepass.ejs',{findC})
+  res.render('changepass.ejs',{findC,errors:req.flash('errors')})
 });
 
 router.post("/:id",validation, async (req, res) => {
@@ -28,9 +28,10 @@ router.post("/:id",validation, async (req, res) => {
         },
         { new: true }
       );
-    res.status(200).json("تم تغيير كلمة السر");
+     res.redirect(`/changepass/${updatedUser._id}`)
     }else{
-    res.status(200).json("Password must be at least 8 characters, include an uppercase letter , number and symbol like [@,#.*]");
+    req.flash('errors',error.array())
+    res.status(200).json(`/changepass/${updatedUser._id}`);
     }
   } catch (err) {
     res.status(200).json({ err, status: false });
