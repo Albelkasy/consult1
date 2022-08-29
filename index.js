@@ -22,12 +22,8 @@ const path = require("path");
 const paypal = require('paypal-rest-sdk');
 const cors = require("cors");
 const Consultant = require("./models/User.Consultant");
-var session = require('express-session')
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
-}))
+
+
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true },() => {
@@ -92,7 +88,6 @@ app.post("/api/upload1/:id",upload.single("photo"), async (req, res) => {
 });
 
 app.use(cors());
-app.use(flash());
 app.use("/api/authU", authURoute);
 app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
