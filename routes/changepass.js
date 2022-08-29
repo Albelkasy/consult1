@@ -21,6 +21,7 @@ router.post("/:id", async (req, res) => {
 
   try {
     if (error.isEmpty()) {
+      console.log(error.isEmpty())
       const updatedUser = await consultant.findByIdAndUpdate(
         req.params.id,
         {
