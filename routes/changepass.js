@@ -5,6 +5,7 @@ const CryptoJS = require("crypto-js");
 
 
 router.get('/changepass/:id', async (req, res) => {
+  console.log(req.params.id)
   res.render('changepass.ejs')
 });
 
