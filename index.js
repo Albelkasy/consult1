@@ -11,6 +11,8 @@ const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const authURoute = require("./routes/authU");
 const authCRoute = require("./routes/authC");
+const resetPassword = require("./routes/resetPassword")
+const changepass = require('./routes/changepass')
 const payRoute = require('./routes/pay')
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
@@ -29,6 +31,7 @@ mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopolo
   }
 );
 app.use("/images", express.static(path.join(__dirname, "public/images")));
+app.use( express.static(path.join(__dirname, "public")));
 
 //middleware
 app.use(express.json());
@@ -90,6 +93,8 @@ app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
 app.use("/api/pay", payRoute);
 app.use("/auth", authRoute);
+app.use("/api/Rpass",resetPassword);
+app.use(changepass);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/checkout", stripeRoute);

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand text-center" href="#">Consultant</a>
+        </div>
+    </nav>
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-md-8 m-auto card p-5">
+                <div class="">
+                    <h3 class="text-center">Account Setting</h3>
+                    <hr>
+                    <form action="/:id" method="POST">
+                        <input name="email" placeholder="Email" type="email" class="form-control my-2">
+                        <hr >
+                        <input name="newpass" placeholder="New Password" type="password" class="form-control my-2">
+                        <input name="repass" placeholder="Repeat Password" type="password" class="form-control my-2">
+                        <button class="btn btn-info mt-3">Save Setting</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>
