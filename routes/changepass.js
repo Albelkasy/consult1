@@ -21,7 +21,6 @@ router.post("/:id",validation, async (req, res) => {
 
   try {
     if (error.isEmpty()) {
-      console.log(error.isEmpty())
       const updatedUser = await consultant.findByIdAndUpdate(
         req.params.id,
         {
@@ -29,9 +28,9 @@ router.post("/:id",validation, async (req, res) => {
         },
         { new: true }
       );
-    res.status(200).json({ updatedUser, status: true });
+    res.status(200).json("تم تغيير كلمة السر");
     }else{
-    res.status(200).json({ message:"err in validation", status: false });
+    res.status(200).json("Password must be at least 8 characters, include an uppercase letter , number and symbol like [@,#.*]");
     }
   } catch (err) {
     res.status(200).json({ err, status: false });
