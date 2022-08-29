@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { validationResult } = require('express-validator')
 const consultant =require('../models/User.Consultant')
 const CryptoJS = require("crypto-js");
-
+const validation = require('../validator/settings.validation')
 
 router.get('/changepass/:id', async (req, res) => {
   const {id} = req.params
@@ -10,7 +10,7 @@ router.get('/changepass/:id', async (req, res) => {
   res.render('changepass.ejs',{findC})
 });
 
-router.post("/:id", async (req, res) => {
+router.post("/:id",validation, async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
