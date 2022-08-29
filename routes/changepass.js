@@ -24,7 +24,7 @@ router.post("/:id", async (req, res) => {
       const updatedUser = await consultant.findByIdAndUpdate(
         req.params.id,
         {
-          password:req.body.newpass
+          $set:req.body
         },
         { new: true }
       );
