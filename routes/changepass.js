@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const { validationResult } = require('express-validator')
 const consultant =require('../models/User.Consultant')
 
 router.get('/changepass/:id', async (req, res) => {
@@ -13,10 +12,7 @@ router.post("/", async (req, res) => {
       process.env.PASS_SEC
     ).toString();
   }
-  const error = validationResult(req)
-
   try {
-    if (error.isEmpty()) {
       const updatedUser = await consultant.findByIdAndUpdate(
         req.params.id,
         {
@@ -25,9 +21,6 @@ router.post("/", async (req, res) => {
         { new: true }
       );
     res.status(200).json({ updatedUser, status: true });
-    }else{
-    res.status(200).json({ message:"err in validation", status: false });
-    }
   } catch (err) {
     res.status(200).json({ err, status: false });
   }
