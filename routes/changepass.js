@@ -21,7 +21,7 @@ router.post("/:id",validation, async (req, res) => {
 
   try {
     if (error.isEmpty()) {
-      const updatedUser = await consultant.findByIdAndUpdate(
+      await consultant.findByIdAndUpdate(
         req.params.id,
         {
           password:req.body.password
