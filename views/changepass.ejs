@@ -22,13 +22,7 @@
                     <hr>
                     <form action="/<%= findC._id %> " method="post">
                         <input name="password" placeholder="New Password" type="password" class="form-control my-2">
-                        <% if (errors.find(e=>e.param=='password')) { %>
-                            <span class="row alert alert-danger">password not validation </span>
-                        <% } %>
                         <input name="repass" placeholder="Repeat Password" type="password" class="form-control my-2">
-                        <% if (errors.find(e=>e.param=='repass')) { %>
-                            <span class="row alert alert-danger">password not equal repass </span>
-                        <% } %>
                         <button class="btn btn-info mt-3">Save Setting</button>
                     </form>
                 </div>
