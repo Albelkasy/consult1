@@ -3,8 +3,6 @@ const { validationResult } = require('express-validator')
 const consultant =require('../models/User.Consultant')
 
 router.get('/changepass/:id', async (req, res) => {
-  Cid = req.params._id
-  console.log(Cid)
   res.render('changepass.ejs')
 });
 
