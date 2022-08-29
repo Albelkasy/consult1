@@ -7,35 +7,34 @@ const CryptoJS = require("crypto-js");
 router.get('/changepass/:id', async (req, res) => {
   const {id} = req.params
   const findC = await consultant.findOne({_id:id})
-  console.log(findC)
-  res.render('changepass.ejs')
+  res.render('changepass.ejs',{findC})
 });
 
-router.post("/", async (req, res) => {
-  // if (req.body.password) {
-  //   req.body.password = CryptoJS.AES.encrypt(
-  //     req.body.password,
-  //     process.env.PASS_SEC
-  //   ).toString();
-  // }
-  // const error = validationResult(req)
+router.post("/:id", async (req, res) => {
+  if (req.body.password) {
+    req.body.password = CryptoJS.AES.encrypt(
+      req.body.password,
+      process.env.PASS_SEC
+    ).toString();
+  }
+  const error = validationResult(req)
 
-  // try {
-  //   if (error.isEmpty()) {
-  //     const updatedUser = await consultant.findByIdAndUpdate(
-  //       req.params.id,
-  //       {
-  //         password:req.body.newpass
-  //       },
-  //       { new: true }
-  //     );
-  //   res.status(200).json({ updatedUser, status: true });
-  //   }else{
-  //   res.status(200).json({ message:"err in validation", status: false });
-  //   }
-  // } catch (err) {
-  //   res.status(200).json({ err, status: false });
-  // }
+  try {
+    if (error.isEmpty()) {
+      const updatedUser = await consultant.findByIdAndUpdate(
+        req.params.id,
+        {
+          password:req.body.newpass
+        },
+        { new: true }
+      );
+    res.status(200).json({ updatedUser, status: true });
+    }else{
+    res.status(200).json({ message:"err in validation", status: false });
+    }
+  } catch (err) {
+    res.status(200).json({ err, status: false });
+  }
 });
 
 module.exports = router
