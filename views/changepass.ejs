@@ -22,8 +22,18 @@
                     <hr>
                     <form action="/<%= findC._id %> " method="post">
                         <input name="password" placeholder="New Password" type="password" class="form-control my-2">
+                        <% if (errors.find(e=>e.param=='password')) { %>
+                         <div class="alert alert-danger">
+                            password must have at least one special character (A-Z-#-@)
+                         </div>
+                        <% } %>
                         <input name="repass" placeholder="Repeat Password" type="password" class="form-control my-2">
-                        <button class="btn btn-info mt-3">Save Setting</button>
+                        <% if (errors.find(e=>e.param=='repass')) { %>
+                            <div class="alert alert-danger">
+                            The password confirmation does not match
+                            </div>
+                           <% } %>
+                        <button class="btn btn-info mt-3">Save change</button>
                     </form>
                 </div>
             </div>
