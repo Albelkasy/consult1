@@ -30,6 +30,7 @@ router.post("/:id",validation, async (req, res) => {
       );
      res.redirect('/changepass/'+updateduser._id);
     }else{
+      console.log(req.params.id)
     res.redirect('/changepass/'+req.params.id);
     }
   } catch (err) {
