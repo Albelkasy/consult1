@@ -7,10 +7,11 @@ const validation = require('../validator/settings.validation')
 router.get('/changepass/:id', async (req, res) => {
   const {id} = req.params
   const findC = await consultant.findOne({_id:id})
-  res.render('changepass.ejs',{findC,errors:req.flash('errors'),success:req.flash('success')})
+  res.render('changepass.ejs',{findC,errors:req.flash('errors'),oldI:req.flash('oldI'),success:req.flash('success')})
 });
 
 router.post("/:id",validation, async (req, res) => {
+  const {password,repass} = req.body
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
@@ -32,6 +33,7 @@ router.post("/:id",validation, async (req, res) => {
       res.redirect('/changepass/'+req.params.id);
     }else{
     req.flash('errors',error.array())
+    req.flash('oldI',{password,repass})
     res.redirect('/changepass/'+req.params.id);
     }
   } catch (err) {
