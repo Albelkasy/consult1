@@ -4,7 +4,7 @@ const consultant =require('../models/User.Consultant')
 const CryptoJS = require("crypto-js");
 const validation = require('../validator/settings.validation')
 
-router.get('/changepass/:id', async (req, res) => {
+router.get('/changepass', async (req, res) => {
   const {id} = req.params
   const findC = await consultant.findOne({_id:id})
   res.render('changepass.ejs',{findC})
