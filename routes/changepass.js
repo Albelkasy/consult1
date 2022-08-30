@@ -21,14 +21,14 @@ router.post("/:id",validation, async (req, res) => {
 
   try {
     if (error.isEmpty()) {
-      await consultant.findByIdAndUpdate(
+      const updateduser = await consultant.findByIdAndUpdate(
         req.params.id,
         {
           password:req.body.password
         },
         { new: true }
       );
-     res.redirect('/changepass/'+findC._id);
+     res.redirect('/changepass/'+updateduser._id);
     }else{
     res.status(200).json("Password must be at least 8 characters, include an uppercase letter , number and symbol like [@,#.*] العودة الى الخلف");
     }
