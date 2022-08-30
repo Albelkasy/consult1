@@ -28,6 +28,7 @@ router.post("/:id",validation, async (req, res) => {
         },
         { new: true }
       );
+      console.log(req.params.id)
      res.redirect('/changepass/'+updateduser._id);
     }else{
     res.redirect('/changepass/'+req.params.id);
