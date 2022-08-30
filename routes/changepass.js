@@ -7,7 +7,7 @@ const validation = require('../validator/settings.validation')
 router.get('/changepass/:id', async (req, res) => {
   const {id} = req.params
   const findC = await consultant.findOne({_id:id})
-  res.render('changepass.ejs',{findC,errors:req.flash('errors')})
+  res.render('changepass.ejs',{findC,errors:req.flash('errors'),success:req.flash('success')})
 });
 
 router.post("/:id",validation, async (req, res) => {
@@ -28,7 +28,8 @@ router.post("/:id",validation, async (req, res) => {
         },
         { new: true }
       );
-     res.redirect('/changepass/'+req.params.id);
+      req.flash('success',true)
+      res.redirect('/changepass/'+req.params.id);
     }else{
     req.flash('errors',error.array())
     res.redirect('/changepass/'+req.params.id);
