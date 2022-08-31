@@ -6,7 +6,6 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const multer = require("multer");
-const authA = require('./routes/authA')
 const userRoute = require("./routes/users");
 const authURoute = require("./routes/authU");
 const authCRoute = require("./routes/authC");
@@ -99,7 +98,6 @@ app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
 app.use("/api/pay", payRoute);
 app.use("/api/Rpass",resetPassword);
-app.use("/api/Admin",authA);
 app.use(changepass);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
