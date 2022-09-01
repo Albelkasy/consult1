@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>Home</title>
+</head>
+
+<body id="home">
+    <!-- ===================================navbar===================================== -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <h4 class="text-white">Consultation</h4>
+            <h4 class="text-white">Admin</h4>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        </div>
+    </nav>
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="deleteMod" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="/delete" method="POST">
+            <div class="modal-content">
+                <div class="modal-header mm" >
+                  <h5 class="modal-title" id="deleteModal">delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <span>are you sure?</span>
+                  <input  type="hidden" name="_id" id="postId">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+
+        </form>
+
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="editt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header mm">
+          <h5 class="modal-title" id="exampleModalLabel">edit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="/edit" method="POST">
+                <input  type="text" name="_id" id="postIdd">
+
+                <input id="inputid" name="id" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputphoto" name="photo" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputfile" name="file" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputusername" name="username" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputemail" name="email" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputpassword" name="password" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputQualification" name="Qualification" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputcounseling" name="counseling" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputduration" name="duration" class="form-control my-3" placeholder="Enter Title" type="text">
+                <textarea id="inputAbout" class="form-control" placeholder="Enter Text" name="About" cols="30"
+                    rows="10"></textarea>
+                <input id="inputcountry" name="country" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputphone" name="phone" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputprice" name="price" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputrating" name="rating" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputFCM_TOKEN" name="FCM_TOKEN" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputcreatedAt" name="createdAt" class="form-control my-3" placeholder="Enter Title" type="text">
+                <input id="inputupdatedAt" name="updatedAt" class="form-control my-3" placeholder="Enter Title" type="text">
+                
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 m-auto">
+                <% for( let i = 0; i < consultant.length; i++ ) { %>   
+                <div class="post card p-4 auto">
+                    <p id="_id1<%=consultant[i]._id %>"><h3>_id:</h3><%= consultant[i]._id %> </p>
+                    <p id="photo<%=consultant[i]._id %>" class="pt-4"><h3>photo:</h3><%= consultant[i].photo %></p>
+                    <p id="file<%=consultant[i]._id %>" class="pt-4"><h3>file:</h3><%= consultant[i].file %></p>
+                    <p id="username<%=consultant[i]._id %>" class="pt-4"><h3>username:</h3><%= consultant[i].username %></p>
+                    <p id="email<%=consultant[i]._id %>" class="pt-4"><h3>email:</h3><%= consultant[i].email %></p>
+                    <p id="password<%=consultant[i]._id %>" class="pt-4"><h3>password:</h3><%= consultant[i].password %></p>
+                    <p id="Qualification<%=consultant[i]._id %>" class="pt-4"><h3>Qualification:</h3><%= consultant[i].Qualification %></p>
+                    <p id="counseling<%=consultant[i]._id %>" class="pt-4"><h3>counseling:</h3><%= consultant[i].counseling %></p>
+                    <p id="duration<%=consultant[i]._id %>" class="pt-4"><h3>duration:</h3><%= consultant[i].duration %></p>
+                    <p id="About<%=consultant[i]._id %>" class="pt-4"><h3>About:</h3><%= consultant[i].About %></p>
+                    <p id="country<%=consultant[i]._id %>" class="pt-4"><h3>country:</h3><%= consultant[i].country %></p>
+                    <p id="phone<%=consultant[i]._id %>" class="pt-4"><h3>phone:</h3><%= consultant[i].phone %></p>
+                    <p id="price<%=consultant[i]._id %>" class="pt-4"><h3>price:</h3><%= consultant[i].price %></p>
+                    <p id="rating<%=consultant[i]._id %>" class="pt-4"><h3>rating:</h3><%= consultant[i].rating %></p>
+                    <p id="FCM_TOKEN<%=consultant[i]._id %>" class="pt-4"><h3>FCM_TOKEN:</h3><%= consultant[i].FCM_TOKEN %></p>
+                    <p id="createdAt<%=consultant[i]._id %>" class="pt-4"><h3>createdAt:</h3><%= consultant[i].createdAt %></p>
+                    <p id="updatedAt<%=consultant[i]._id %>" class="pt-4"><h3>updatedAt:</h3><%= consultant[i].updatedAt %></p>
+
+                    <div class="d-flex flex-row justify-content-between">
+                    
+                        <button onclick="edit('<%=consultant[i]._id %>')" type="button" class="btn btn-success" data-toggle="modal" data-target="#editt">
+                            edit </button>
+                        <button onclick="getId('<%=consultant[i]._id %>')" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteMod">
+                            delete </button>
+                    </div>
+                </div>                
+                <% } %> 
+
+            </div>
+        </div>
+    </div>
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+    
+</body>
+
+</html>
