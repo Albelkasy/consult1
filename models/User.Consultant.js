@@ -20,6 +20,10 @@ const ConsultantSchema = new mongoose.Schema(
       required: true,
       min: 6,
     },
+    palance:{
+      type:String,
+      default:0.0
+    },
     price:{
       type:String,
       max:100
