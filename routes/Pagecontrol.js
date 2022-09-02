@@ -11,8 +11,8 @@ app.get('/page/:token',verifyTokenAndAdmin, async (req, res) => {
     res.render('PageControl.ejs',{consultant})
 });
 
-app.post('/', (req, res) => {
-    
+app.post('/edit/:id', (req, res) => {
+    console.log('gfgrsghgsfghs')
 });
 
 module.exports = app

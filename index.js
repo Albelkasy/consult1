@@ -15,7 +15,8 @@ const payRoute = require('./routes/pay')
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 const Pagecontrol = require('./routes/Pagecontrol')
-const authA = require('./routes/authA')
+const register = require('./routes/register')
+const login = require('./routes/login')
 const stripeRoute = require("./routes/stripe");
 const router = express.Router();
 const path = require("path");
@@ -31,7 +32,6 @@ app.use(session({
 }))
 
 dotenv.config();
-
 mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true },() => {
     console.log("Connected to MongoDB");
   }
@@ -99,7 +99,8 @@ app.use("/api/authU", authURoute);
 app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
 app.use("/api/pay", payRoute);
-app.use(authA);
+app.use(register);
+app.use(login);
 app.use(Pagecontrol);
 app.use("/api/Rpass",resetPassword);
 app.use(changepass);

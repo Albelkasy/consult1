@@ -18,8 +18,8 @@ router.post('/pay', (req, res) => {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:8800/success",
-            "cancel_url": "http://localhost:8800/cancel"
+            "return_url": "https://consultant1.herokuapp.com/success",
+            "cancel_url": "https://consultant1.herokuapp.com/cancel"
         },
         "transactions": [{
             "item_list": {
