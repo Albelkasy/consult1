@@ -20,7 +20,7 @@ const ConsultantSchema = new mongoose.Schema(
       required: true,
       min: 6,
     },
-    palance:{
+    balance:{
       type:String,
       default:0.0
     },
