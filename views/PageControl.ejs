@@ -83,45 +83,22 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 m-auto">
-        <form action="/edit/<%= consultant._id %>" method="post">
         <% for( let i=0; i < consultant.length; i++ ) { %>
-            <div class="post card p-4 auto">
-              <h3 id="titleee<%=consultant[i]._id %>">
-                <%= consultant[i].email %>
-              </h3>
-              <p id="borrdy<%=consultant[i]._id %>" class="pt-4">
-                <%= consultant[i].password %>
-              </p>
-                <button type="button" class="btn btn-success">
-                  edit </button>
+          <div class="post card p-4 auto">
+            <h3 id="titleee<%=consultant[i]._id %>"><%= consultant[i].email %></h3>
+            <p id="borrdy<%=consultant[i]._id %>" class="pt-4"><%= consultant[i].password %></p>
+            <div class="d-flex flex-row justify-content-between">
+            
+                <button onclick="edit('<%=consultant[i]._id %>')" type="button" class="btn btn-success" data-toggle="modal" data-target="#editt">
+                    edit </button>
+                <button onclick="getId('<%=consultant[i]._id %>')" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteMod">
+                    delete </button>
+            
             </div>
-          <% } %>
-        </form>
+            
 
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 m-auto">
-        <% for( let i=0; i < consultant.length; i++ ) { %>
-          <form action="/delete/<%=consultant[i]._id  %> " method="POST">
-            <div class="post card p-4 auto">
-              <h3 id="titleee<%=consultant[i]._id %>">
-                <%= consultant[i].email %>
-              </h3>
-              <p id="borrdy<%=consultant[i]._id %>" class="pt-4">
-                <%= consultant[i].password %>
-              </p>
 
-              <div class="d-flex flex-row justify-content-between">
-
-                <button type="button" class="btn form-control btn-danger">
-                  delete </button>
-
-              </div>
-            </div>
-          </form>
+        </div>
 
           <% } %>
 
