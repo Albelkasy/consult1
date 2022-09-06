@@ -68,7 +68,7 @@ app.post("/api/upload/:id", upload.single("file"),async (req, res) => {
       {
         $set:
         {
-          file:req.file.path,
+          file:'/images/'+req.file.filename,
         },
       },
       { new: true }
@@ -87,7 +87,7 @@ app.post("/api/upload1/:id",upload.single("photo"), async (req, res) => {
       {
         $set:
         {
-          photo:req.file.path,
+          photo:'/images/'+req.file.filename,
         },
       },
       { new: true }
