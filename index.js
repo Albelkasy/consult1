@@ -16,8 +16,8 @@ const payRoute = require('./routes/pay')
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 const Pagecontrol = require('./routes/Pagecontrol')
-const register = require('./routes/register')
-const login = require('./routes/login')
+const SignUp = require('./routes/SignUp')
+const SignIn = require('./routes/SignIn')
 const stripeRoute = require("./routes/stripe");
 const router = express.Router();
 const path = require("path");
@@ -104,8 +104,8 @@ app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
 app.use("/api/pay", payRoute);
 app.use("/api",require("./routes/app"));
-app.use(register);
-app.use(login);
+app.use(SignUp);
+app.use(SignIn);
 app.use(Pagecontrol);
 app.use("/api/Rpass",resetPassword);
 app.use(changepass);
