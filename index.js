@@ -41,7 +41,7 @@ mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopolo
     console.log("Connected to MongoDB");
   }
 );
-app.use("/images", express.static(path.join(__dirname, "public/images")));
+app.use("/public", express.static(path.join(__dirname, "public")));
 app.use( express.static(path.join(__dirname, "public")));
 
 //middleware
@@ -52,14 +52,14 @@ app.use(morgan("common"));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/images");
+    cb(null, "public");
   },
   filename: (req, file, cb) => {
     cb(null,Date.now()+"-"+Math.random()*100+file.originalname);
   },
 });
 
-const upload = multer({ dest:"public/images", storage });
+const upload = multer({ dest:"public", storage });
 app.post("/api/upload/:id", upload.single("file"),async (req, res) => {
   try {
     console.log(req.file.path)
