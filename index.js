@@ -21,7 +21,6 @@ const login = require('./routes/login')
 const stripeRoute = require("./routes/stripe");
 const router = express.Router();
 const path = require("path");
-const paypal = require('paypal-rest-sdk');
 const cors = require("cors");
 const Consultant = require("./models/User.Consultant");
 var session = require('express-session')
