@@ -41,7 +41,7 @@ mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopolo
     console.log("Connected to MongoDB");
   }
 );
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use( express.static(path.join(__dirname, "uploads")));
 app.use( express.static(path.join(__dirname, "public")));
 
 //middleware
