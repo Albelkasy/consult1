@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
-const cookieSession = require("cookie-session");
 const mongoose = require("mongoose");
+const http = require("http")
+const server = http.createServer(app);
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -25,6 +26,9 @@ const cors = require("cors");
 const Consultant = require("./models/User.Consultant");
 var session = require('express-session')
 var flash = require('connect-flash');
+const{initMeetingServer}= require("./meeting-server")
+
+initMeetingServer(server);
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -32,11 +36,12 @@ app.use(session({
 }))
 
 dotenv.config();
+mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true },() => {
     console.log("Connected to MongoDB");
   }
 );
-app.use("/images", express.static(path.join(__dirname, "public/images")));
+app.use("/images", express.static(path.join(__dirname, "/public/images")));
 app.use( express.static(path.join(__dirname, "public")));
 
 //middleware
@@ -99,6 +104,7 @@ app.use("/api/authU", authURoute);
 app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
 app.use("/api/pay", payRoute);
+app.use("/api",require("./routes/app"));
 app.use(register);
 app.use(login);
 app.use(Pagecontrol);
@@ -108,6 +114,6 @@ app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/checkout", stripeRoute);
 
-app.listen(process.env.PORT||5000, () => {
+server.listen(process.env.PORT||5000, () => {
   console.log("Backend server is running!");
 });
