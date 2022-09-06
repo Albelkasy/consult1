@@ -50,29 +50,32 @@ router.put("/:id", async (req, res) => {
 //LOGIN
 
 router.post('/login', async (req, res) => {
-    try{
-        const user = await User.findOne(
-            {
-                email: req.body.email
-            }
-        );
+  const {email,password}=req.body
+  try {
+    const user = await User.findOne({email})
+    if (user) {
+      const hashedPassword = CryptoJS.AES.decrypt(
+        user.password,
+        process.env.PASS_SEC
+    );
 
-        !user && res.status(200).json({message:"Wrong User email",status:false});
+    console.log(user)
+    console.log(hashedPassword)
+    console.log(user.password)
+    console.log(process.env.PASS_SEC)
 
-        const hashedPassword = CryptoJS.AES.decrypt(
-            user.password,
-            process.env.PASS_SEC
-        );
+    const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8)
 
+    console.log(originalPassword)
 
-        const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+    console.log(email)
+    console.log(password)
 
-        const inputPassword = req.body.password;
-        
-        originalPassword != inputPassword && 
-            res.status(200).json({message:"Wrong Password",status:false});
-
-        const accessToken = jwt.sign(
+    const inputPassword =password;
+    if (originalPassword != inputPassword) {
+      res.status(200).json({message:"Wrong Password",status:false});
+    } else {
+      const accessToken = jwt.sign(
         {
             id: user._id,
             isAdmin: user.isAdmin,
@@ -80,14 +83,16 @@ router.post('/login', async (req, res) => {
         process.env.JWT_SEC,
             {expiresIn:"3d"}
         );
-  
         const { password, ...others } = user._doc;  
         res.status(200).json({...others, accessToken,status:true});
-
-    }catch(err){
-        res.status(200).json({err,status:false});
     }
-
+    } else {
+       res.status(200).json({message:"Wrong User email",status:false});
+    }
+    
+  } catch (err) {
+    res.status(200).json({err,status:false});
+  }
 });
 
 module.exports = router;
