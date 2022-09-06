@@ -4,12 +4,12 @@ const AdminModel = require('../models/Admin')
 const jwt = require("jsonwebtoken");
 const CryptoJS = require("crypto-js");
 
-app.get('/', (req, res) => {
+app.get('/register', (req, res) => {
      res.render('register.ejs');
 });
 
 //REGISTER
-app.post("/register", async (req, res) => {
+app.post("/SignUp", async (req, res) => {
     
     const newAdmin = new AdminModel({
       username: req.body.username,
