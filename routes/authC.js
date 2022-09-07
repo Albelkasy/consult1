@@ -59,17 +59,7 @@ router.post('/login', async (req, res) => {
         process.env.PASS_SEC
     );
 
-    console.log(user)
-    console.log(hashedPassword)
-    console.log(user.password)
-    console.log(process.env.PASS_SEC)
-
     const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8)
-
-    console.log(originalPassword)
-
-    console.log(email)
-    console.log(password)
 
     const inputPassword =password;
     if (originalPassword != inputPassword) {

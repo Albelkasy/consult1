@@ -28,7 +28,7 @@ const meetingUser = mongoose.model(
             require:true
         },
     },
-    {timestaps:true})
+    {timestamps:true})
 );
 
 module.exports = {
