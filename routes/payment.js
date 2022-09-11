@@ -15,7 +15,7 @@ try {
 	let payment = await cko.payments.request({
 		source: {
 			type: 'card',
-			number: req.body.number,
+			number:req.body.number,
 			expiry_month: req.body.expiry_month,
 			expiry_year: req.body.expiry_year,
 			name:req.body.name,
@@ -23,10 +23,10 @@ try {
 			stored:false,
 			store_for_future_use:false
 		},
-		amount: req.body.amount,
+		amount: req.body.amount*100,
 		currency: 'USD',
 		payment_type: 'Regular',
-		reference: 'ORDER 1234',
+		reference: `${Math.random()*10000000000000000}`,
 		description: 'Mint Tea',
 	});
 	 res.json(payment);
