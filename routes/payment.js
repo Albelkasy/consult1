@@ -23,7 +23,7 @@ try {
 			stored:false,
 			store_for_future_use:false
 		},
-		amount: 100000,
+		amount: req.body.amount,
 		currency: 'USD',
 		payment_type: 'Regular',
 		reference: 'ORDER 1234',
