@@ -10,6 +10,7 @@ const multer = require("multer");
 const userRoute = require("./routes/users");
 const authURoute = require("./routes/authU");
 const authCRoute = require("./routes/authC");
+const payments = require('./routes/payment')
 const resetPassword = require("./routes/resetPassword")
 const changepass = require('./routes/changepass')
 const payRoute = require('./routes/pay')
@@ -103,6 +104,7 @@ app.use("/api/authU", authURoute);
 app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
 app.use("/api/pay", payRoute);
+app.use("/api",payments)
 app.use("/api",require("./routes/app"));
 app.use(SignUp);
 app.use(SignIn);
