@@ -129,7 +129,7 @@ app.get('/auth/failure',(req,res)=>{
 
 
 app.get('/protected',isLoggedIn,(req,res)=>{
-  res.json(`hello${req.user}`)
+  res.json(req.user)
 })
 
 
