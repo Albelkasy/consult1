@@ -29,7 +29,7 @@ try {
 		reference: `${Math.random()*100000000000000000}`,
 		description: 'Mint Tea',
 	});
-	 res.json({payment,message:"success",status:true});
+	 res.json({payment,message:["success"],status:true});
 } catch (err) {
 	res.json({message:err.body.error_codes,status:false});
 }
