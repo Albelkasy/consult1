@@ -31,7 +31,7 @@ try {
 	});
 	 res.json({payment,message:"success",status:true});
 } catch (err) {
-	res.json({message:err.error_codes,status:false});
+	res.json({message:err.body.error_codes,status:false});
 }
 })
 
