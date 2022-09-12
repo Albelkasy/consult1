@@ -7,7 +7,7 @@ const GOOGLE_CLIENT_SECRET = "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";
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/auth/google"
+    callbackURL: "/auth/google"
   },
   function(accessToken, refreshToken, profile, done) {
       userProfile=profile;
