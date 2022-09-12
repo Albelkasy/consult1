@@ -10,8 +10,8 @@ const multer = require("multer");
 const userRoute = require("./routes/users");
 const authURoute = require("./routes/authU");
 const authCRoute = require("./routes/authC");
-const authRoute = require("./routes/auth");
-const payments = require('./routes/payment')
+const payments = require('./routes/auth')
+require('./routes/payment')
 const resetPassword = require("./routes/resetPassword")
 const changepass = require('./routes/changepass')
 const payRoute = require('./routes/pay')
@@ -27,21 +27,25 @@ const cors = require("cors");
 const Consultant = require("./models/User.Consultant");
 var session = require('express-session')
 var flash = require('connect-flash');
-const{initMeetingServer}= require("./meeting-server")
+const{initMeetingServer}= require("./meeting-server");
+const passport = require("passport");
 
-const passport = require('passport');
-var userProfile;
+
+function isLoggedIn(req,res,next){
+  req.user ? next() : res.sendStatus(401)
+}
+
 
 
 initMeetingServer(server);
-app.set('view engine', 'ejs');
-
 app.use(session({
+  secret: 'cats',
   resave: false,
-  saveUninitialized: true,
-  secret: 'SECRET' 
-}));
+  saveUninitialized: false,
+}))
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 dotenv.config();
 mongoose.Promise = global.Promise;
@@ -108,20 +112,31 @@ app.post("/api/upload1/:id",upload.single("photo"), async (req, res) => {
 
 
 
+app.get('/',(req,res)=>{
+res.send('<a href="/auth/google">google</a>')
+})
 
-app.use(passport.initialize());
-app.use(passport.session());
 
-app.get('/success', (req, res) => res.json({message:"true"}));
-app.get('/error', (req, res) => res.send("error logging in"));
+app.get('/auth/google',
+passport.authenticate('google',{scope:['email','profile']})
+);
 
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
+app.get('/auth/google/callback',
+passport.authenticate('google',{
+  successRedirect: '/protected',
+  failureRedirect: '/auth/failure'
+})
+);
+
+app.get('/auth/failure',(req,res)=>{
+  res.send('someting went wrong..');
 });
 
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
+
+app.get('/protected',isLoggedIn,(req,res)=>{
+  res.send(`hello${req.user.displayName}`)
+})
+
 
 
 
@@ -131,7 +146,6 @@ app.use("/api/authU", authURoute);
 app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
 app.use("/api/pay", payRoute);
-app.use(authRoute);
 app.use("/api",payments)
 app.use("/api",require("./routes/app"));
 app.use(SignUp);
