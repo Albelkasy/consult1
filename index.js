@@ -10,6 +10,7 @@ const multer = require("multer");
 const userRoute = require("./routes/users");
 const authURoute = require("./routes/authU");
 const authCRoute = require("./routes/authC");
+const authRoute = require("./routes/auth");
 const payments = require('./routes/payment')
 const resetPassword = require("./routes/resetPassword")
 const changepass = require('./routes/changepass')
@@ -28,12 +29,19 @@ var session = require('express-session')
 var flash = require('connect-flash');
 const{initMeetingServer}= require("./meeting-server")
 
+const passport = require('passport');
+var userProfile;
+
+
 initMeetingServer(server);
+app.set('view engine', 'ejs');
+
 app.use(session({
-  secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: false,
-}))
+  saveUninitialized: true,
+  secret: 'SECRET' 
+}));
+
 
 dotenv.config();
 mongoose.Promise = global.Promise;
@@ -98,12 +106,32 @@ app.post("/api/upload1/:id",upload.single("photo"), async (req, res) => {
   }
 });
 
+
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/success', (req, res) => res.json({message:"true"}));
+app.get('/error', (req, res) => res.send("error logging in"));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+
+
 app.use(cors());
 app.use(flash());
 app.use("/api/authU", authURoute);
 app.use("/api/authC", authCRoute);
 app.use("/api/users", userRoute);
 app.use("/api/pay", payRoute);
+app.use(authRoute);
 app.use("/api",payments)
 app.use("/api",require("./routes/app"));
 app.use(SignUp);
