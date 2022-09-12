@@ -26,7 +26,7 @@ try {
 		amount: req.body.amount*100,
 		currency: 'USD',
 		payment_type: 'Regular',
-		reference: `${Math.random()*10000000000000000}`,
+		reference: `${Math.random()*100000000000000000}`,
 		description: 'Mint Tea',
 	});
 	 res.json(payment);
