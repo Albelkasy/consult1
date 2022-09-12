@@ -112,11 +112,6 @@ app.post("/api/upload1/:id",upload.single("photo"), async (req, res) => {
 
 
 
-app.get('/',(req,res)=>{
-res.send('<a href="/auth/google">google</a>')
-})
-
-
 app.get('/auth/google',
 passport.authenticate('google',{scope:['email','profile']})
 );
